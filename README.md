@@ -9,12 +9,12 @@ How To Use it?
 - Add this project as a submodule in project that you're working on.
 
 ```
-	git add submodule git@github.com:OptimatistOpenSource/psh-proto.git /path/to/psh-proto
+    git submodule add git@github.com:OptimatistOpenSource/psh-proto.git /path/to/psh-proto
 ```
 
 - Initialize and Update Submodule:
 ```
-	git submodule update --init --recursive
+    git submodule update --init --recursive
 ```
 
 - Reference the protobuf files within it directly from your project. Import the protobuf definitions in your projects as you normally would. 

@@ -1,0 +1,12 @@
+syntax ="proto3";
+
+import "google/protobuf/empty.proto";
+package psh;
+
+service PshService {
+    rpc Heartbeat(google.protobuf.Empty) returns (PshResponse);
+}
+
+message PshResponse {
+    string resp = 1;
+}

@@ -1,4 +1,4 @@
-PSH Protobuf proto project
+PSH Protobuf Project
 =========================
 
 This project is shared between different projects that need to communicate with each others via gRPC.

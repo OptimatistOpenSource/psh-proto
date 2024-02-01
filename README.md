@@ -24,7 +24,7 @@ Rust
 
 To automatically use the latest proto files while you're running `cargo build`, add this code snippet in your `build.rs`. For example:
 
-```
+```rust
 use std::process::Command;
 
 fn main() {

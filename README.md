@@ -30,7 +30,7 @@ se std::process::Command;
 fn main() {
     // Update the psh-proto submodule
     let _ = Command::new("git")
-        .args(&["submodule", "update", "--init", "--recursive"])
+        .args(&["submodule", "update", "--remote", "--merge"])
         .status();
 
     // Additional build steps if needed

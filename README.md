@@ -25,7 +25,7 @@ Rust
 To automatically use the latest proto files while you're running `cargo build`, add this code snippet in your `build.rs`. For example:
 
 ```
-se std::process::Command;
+use std::process::Command;
 
 fn main() {
     // Update the psh-proto submodule

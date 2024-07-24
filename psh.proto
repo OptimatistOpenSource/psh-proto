@@ -14,12 +14,15 @@ message PshResponse {
 }
 
 message HostInfoRequest {
-  optional string ipv4 = 1;
-  optional string ipv6 = 2;
-  string os = 3;
-  string hostname = 4;
+  string token = 1;
+  optional bytes ipv4 = 2;
+  optional bytes ipv6 = 3;
+  string os = 4;
+  string architecture = 5;
+  string hostname = 6;
 }
 
 message HostInfoResponse {
-  string message = 1;
+  int64 errno = 1;
+  optional string message = 2;
 }

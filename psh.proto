@@ -1,12 +1,25 @@
 syntax ="proto3";
 
-import "google/protobuf/empty.proto";
 package psh;
 
+import "google/protobuf/empty.proto";
+
 service PshService {
-    rpc Heartbeat(google.protobuf.Empty) returns (PshResponse);
+  rpc Heartbeat(google.protobuf.Empty) returns (PshResponse);
+  rpc SendHostInfo(HostInfoRequest) returns (HostInfoResponse);
 }
 
 message PshResponse {
-    string resp = 1;
+  string resp = 1;
+}
+
+message HostInfoRequest {
+  optional string ipv4 = 1;
+  optional string ipv6 = 2;
+  string os = 3;
+  string hostname = 4;
+}
+
+message HostInfoResponse {
+  string message = 1;
 }

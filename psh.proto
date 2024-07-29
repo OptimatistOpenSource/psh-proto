@@ -15,11 +15,12 @@ message PshResponse {
 
 message HostInfoRequest {
   string token = 1;
-  optional bytes ipv4 = 2;
+  optional fixed32 ipv4 = 2;
   optional bytes ipv6 = 3;
-  string os = 4;
-  string architecture = 5;
-  string hostname = 6;
+  optional string os = 4;
+  optional string architecture = 5;
+  optional string hostname = 6;
+  optional string kernel_version = 7;
 }
 
 message HostInfoResponse {

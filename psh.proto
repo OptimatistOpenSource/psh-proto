@@ -5,21 +5,19 @@ package psh;
 import "google/protobuf/empty.proto";
 
 service PshService {
-  rpc SendHeartbeat(HeartbeatRequest) returns (HeartbeatResponse);
   rpc SendHostInfo(HostInfoRequest) returns (HostInfoResponse);
-}
-
-message HeartbeatRequest {
-  string instance_id = 2;
-}
-
-message HeartbeatResponse {
-  string resp = 1;
 }
 
 message HostInfoRequest {
   string token = 1;
+
+  // This field should be empty if it is the first time the instance connected to the server,
+  // and the server will returns an `instance_id` in response.
+  // If this field contains a value, the server will use this to identify the machine instance.
   optional string instance_id = 2;
+
+  // The following field can be empty if this request is used for heartbeat.
+  // If any of them contains a value, the instance info on the server side will be updated.
   optional string os = 3;
   optional string architecture = 4;
   optional string hostname = 5;
@@ -28,6 +26,9 @@ message HostInfoRequest {
 
 message HostInfoResponse {
   int64 errno = 1;
+
+  // Not empty if and only if the request has no `instance_id`.
   optional string instance_id = 2;
+
   optional string message = 3;
 }

@@ -5,23 +5,29 @@ package psh;
 import "google/protobuf/empty.proto";
 
 service PshService {
-  rpc Heartbeat(google.protobuf.Empty) returns (PshResponse);
+  rpc SendHeartbeat(HeartbeatRequest) returns (HeartbeatResponse);
   rpc SendHostInfo(HostInfoRequest) returns (HostInfoResponse);
 }
 
-message PshResponse {
+message HeartbeatRequest {
+  string instance_id = 2;
+}
+
+message HeartbeatResponse {
   string resp = 1;
 }
 
 message HostInfoRequest {
   string token = 1;
-  optional string os = 2;
-  optional string architecture = 3;
-  optional string hostname = 4;
-  optional string kernel_version = 5;
+  optional string instance_id = 2;
+  optional string os = 3;
+  optional string architecture = 4;
+  optional string hostname = 5;
+  optional string kernel_version = 6;
 }
 
 message HostInfoResponse {
   int64 errno = 1;
-  optional string message = 2;
+  optional string instance_id = 2;
+  optional string message = 3;
 }

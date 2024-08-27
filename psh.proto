@@ -8,6 +8,13 @@ service PshService {
   rpc SendHostInfo(HostInfoRequest) returns (HostInfoResponse);
 }
 
+message Ipv6Addr {
+  // high 64 bits part of big-endian ipv6 address
+  fixed64 hi_64_bits;
+  // low 64 bits part of big-endian ipv6 address
+  fixed64 lo_64_bits;
+}
+
 message HostInfoRequest {
   string token = 1;
 
@@ -22,8 +29,8 @@ message HostInfoRequest {
   optional string architecture = 4;
   optional string hostname = 5;
   optional string kernel_version = 6;
-  optional fixed32 local_ipv4_addr = 7;
-  optional bytes local_ipv6_addr = 8;
+  optional fixed32 local_ipv4_addr = 7;  // big-endian
+  optional Ipv6Addr local_ipv6_addr = 8; // big-endian
 }
 
 message HostInfoResponse {

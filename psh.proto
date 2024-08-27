@@ -22,6 +22,8 @@ message HostInfoRequest {
   optional string architecture = 4;
   optional string hostname = 5;
   optional string kernel_version = 6;
+  optional fixed32 local_ipv4_addr = 7;
+  optional bytes local_ipv6_addr = 8;
 }
 
 message HostInfoResponse {

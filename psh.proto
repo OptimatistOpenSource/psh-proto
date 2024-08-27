@@ -25,7 +25,8 @@ message HostInfoRequest {
 }
 
 message HostInfoResponse {
-  int64 errno = 1;
+  // Empty if no error
+  optional int64 errno = 1;
 
   // Not empty if and only if the request has no `instance_id`.
   optional string instance_id = 2;

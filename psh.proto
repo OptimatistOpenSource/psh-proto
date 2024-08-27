@@ -1,4 +1,4 @@
-syntax ="proto3";
+syntax = "proto3";
 
 package psh;
 
@@ -18,13 +18,15 @@ message Ipv6Addr {
 message HostInfoRequest {
   string token = 1;
 
-  // This field should be empty if it is the first time the instance connected to the server,
-  // and the server will returns an `instance_id` in response.
-  // If this field contains a value, the server will use this to identify the machine instance.
+  // This field should be empty if it is the first time the instance connected
+  // to the server, and the server will returns an `instance_id` in response.
+  // If this field contains a value, the server will use this to identify the
+  // machine instance.
   optional string instance_id = 2;
 
   // The following field can be empty if this request is used for heartbeat.
-  // If any of them contains a value, the instance info on the server side will be updated.
+  // If any of them contains a value, the instance info on the server side will
+  // be updated.
   optional string os = 3;
   optional string architecture = 4;
   optional string hostname = 5;

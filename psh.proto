@@ -2,17 +2,15 @@ syntax = "proto3";
 
 package psh;
 
-import "google/protobuf/empty.proto";
-
 service PshService {
   rpc SendHostInfo(HostInfoRequest) returns (HostInfoResponse);
 }
 
 message Ipv6Addr {
   // high 64 bits part of big-endian ipv6 address
-  fixed64 hi_64_bits;
+  fixed64 hi_64_bits = 1;
   // low 64 bits part of big-endian ipv6 address
-  fixed64 lo_64_bits;
+  fixed64 lo_64_bits = 2;
 }
 
 message HostInfoRequest {

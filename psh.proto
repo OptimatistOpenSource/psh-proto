@@ -14,23 +14,21 @@ message Ipv6Addr {
 }
 
 message HostInfoRequest {
-  string token = 1;
-
   // This field should be empty if it is the first time the instance connected
   // to the server, and the server will returns an `instance_id` in response.
   // If this field contains a value, the server will use this to identify the
   // machine instance.
-  optional string instance_id = 2;
+  optional string instance_id = 1;
 
   // The following field can be empty if this request is used for heartbeat.
   // If any of them contains a value, the instance info on the server side will
   // be updated.
-  optional string os = 3;
-  optional string architecture = 4;
-  optional string hostname = 5;
-  optional string kernel_version = 6;
-  optional fixed32 local_ipv4_addr = 7;  // big-endian
-  optional Ipv6Addr local_ipv6_addr = 8; // big-endian
+  optional string os = 2;
+  optional string architecture = 3;
+  optional string hostname = 4;
+  optional string kernel_version = 5;
+  optional fixed32 local_ipv4_addr = 6;  // big-endian
+  optional Ipv6Addr local_ipv6_addr = 7; // big-endian
 }
 
 message HostInfoResponse {

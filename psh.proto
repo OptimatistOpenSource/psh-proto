@@ -29,6 +29,9 @@ message HostInfoRequest {
   optional string kernel_version = 5;
   optional fixed32 local_ipv4_addr = 6;  // big-endian
   optional Ipv6Addr local_ipv6_addr = 7; // big-endian
+
+  // True if ready to receive and execute WASM component
+  bool idle = 8;
 }
 
 message HostInfoResponse {
@@ -39,4 +42,8 @@ message HostInfoResponse {
   optional string instance_id = 2;
 
   optional string message = 3;
+
+  // If request `idle` is true, the remote server will send the WASM component
+  // bytes (if needed).
+  optional bytes wasm_component = 4;
 }

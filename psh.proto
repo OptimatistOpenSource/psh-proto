@@ -43,7 +43,11 @@ message HostInfoResponse {
 
   optional string message = 3;
 
-  // If request `idle` is true, the remote server will send the WASM component
-  // bytes (if needed).
-  optional bytes wasm_component = 4;
+  // If request `idle` is true, the remote server will send the task if needed.
+  optional Task task = 4;
+}
+
+message Task {
+  bytes wasm = 1;
+  optional repeated string wasm_args = 2;
 }

@@ -4,6 +4,7 @@ package psh;
 
 service PshService {
   rpc SendHostInfo(HostInfoRequest) returns (HostInfoResponse);
+  rpc SendData(DataRequest) returns (DataResponse);
 }
 
 message Ipv6Addr {
@@ -32,8 +33,6 @@ message HostInfoRequest {
 
   // True if ready to receive and execute WASM component
   bool idle = 8;
-  // Data collected by task
-  optional bytes data = 9;
 }
 
 message HostInfoResponse {
@@ -52,4 +51,30 @@ message HostInfoResponse {
 message Task {
   bytes wasm = 1;
   optional repeated string wasm_args = 2;
+}
+
+message DataRequest {
+  Metadata metadata = 1;
+  bytes payload = 2;
+}
+
+message Metadata {
+  // Data type
+  string type = 1;
+  // Data size of bytes
+  uint64 size = 2;
+  // Metric metadata
+  optional MetricMeta metric_meta = 3;
+}
+
+message MetricMeta {
+  uint64 start_time = 1;
+  uint64 end_time = 2;
+  // Mapping from keys to types
+  map<string, string> key_type = 1;
+}
+
+message DataResponse {
+  // Empty if no error
+  optional int64 errno = 1;
 }

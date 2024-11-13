@@ -32,6 +32,8 @@ message HostInfoRequest {
 
   // True if ready to receive and execute WASM component
   bool idle = 8;
+  // Data collected by task
+  optional bytes data = 9;
 }
 
 message HostInfoResponse {

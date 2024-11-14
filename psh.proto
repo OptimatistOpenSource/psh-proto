@@ -51,6 +51,8 @@ message HostInfoResponse {
 message Task {
   bytes wasm = 1;
   optional repeated string wasm_args = 2;
+  // Number of non-leap-milliseconds since Jan 1, 1970 UTC.
+  optional uint64 end_time = 3;
 }
 
 message DataRequest {

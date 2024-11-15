@@ -73,7 +73,7 @@ message MetricMeta {
   uint64 start_time = 1;
   uint64 end_time = 2;
   // Mapping from keys to types
-  map<string, string> key_type = 1;
+  map<string, string> key_type = 3;
 }
 
 message DataResponse {

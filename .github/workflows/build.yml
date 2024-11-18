@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request_target:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  build-check-test:
+    name: ${{ matrix.target.triple }}
+    runs-on: ${{ matrix.target.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - { os: ubuntu-22.04, triple: x86_64-unknown-linux-gnu }
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v3
+        with:
+          version: "28.x"
+
+      - name: Build
+        run: |
+          if [ ! -d target ]; then mkdir target; fi
+          protoc --rust_opt='experimental-codegen=enabled,kernel=cpp' --rust_out=./target psh.proto

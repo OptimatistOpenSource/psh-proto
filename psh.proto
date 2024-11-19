@@ -52,7 +52,7 @@ message Task {
   bytes wasm = 1;
   repeated string wasm_args = 2;
   // Number of non-leap-milliseconds since Jan 1, 1970 UTC.
-  optional uint64 end_time = 3;
+  uint64 end_time = 3;
 }
 
 message DataRequest {

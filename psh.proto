@@ -33,6 +33,8 @@ message HostInfoRequest {
 
   // True if ready to receive and execute WASM component
   bool idle = 8;
+  // Contains finished task id
+  optional string task_id = 9;
 }
 
 message HostInfoResponse {
@@ -49,10 +51,11 @@ message HostInfoResponse {
 }
 
 message Task {
-  bytes wasm = 1;
-  repeated string wasm_args = 2;
+  string id = 1;
+  bytes wasm = 2;
+  repeated string wasm_args = 3;
   // Number of non-leap-milliseconds since Jan 1, 1970 UTC.
-  uint64 end_time = 3;
+  uint64 end_time = 4;
 }
 
 message DataRequest {

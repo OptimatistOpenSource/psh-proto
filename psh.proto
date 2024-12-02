@@ -59,8 +59,9 @@ message Task {
 }
 
 message DataRequest {
-  Metadata metadata = 1;
-  bytes payload = 2;
+  string task_id = 1;
+  Metadata metadata = 2;
+  bytes payload = 3;
 }
 
 message Metadata {

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package psh;
+package psh.proto.instance;
 
 service PshService {
   rpc SendHostInfo(HostInfoRequest) returns (HostInfoResponse);

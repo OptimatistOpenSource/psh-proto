@@ -3,8 +3,16 @@ syntax = "proto3";
 package psh.proto.instance;
 
 service PshService {
+  rpc Heartbeat(InstanceState) returns (None);
   rpc SendHostInfo(HostInfoRequest) returns (HostInfoResponse);
   rpc SendData(DataRequest) returns (DataResponse);
+}
+
+message None {}
+
+message InstanceState {
+  string instance_id = 1;
+  bool idle = 2;
 }
 
 message Ipv6Addr {

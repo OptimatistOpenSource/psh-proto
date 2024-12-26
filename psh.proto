@@ -6,9 +6,12 @@ service PshService {
   rpc Heartbeat(InstanceState) returns (Unit);
   rpc SendHostInfo(HostInfoRequest) returns (HostInfoResponse);
   rpc SendData(DataRequest) returns (DataResponse);
+  rpc GetTask(GetTaskReq) returns (GetTaskResp);
 }
 
 message Unit {}
+message GetTaskReq { string instance_id = 1; }
+message GetTaskResp { optional Task task = 1; }
 
 message InstanceState {
   string instance_id = 1;

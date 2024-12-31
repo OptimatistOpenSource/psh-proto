@@ -4,7 +4,7 @@ package psh.proto.instance;
 
 service PshService {
   rpc Heartbeat(InstanceState) returns (Unit);
-  rpc SendHostInfo(HostInfoRequest) returns (HostInfoResponse);
+  rpc SendHostInfo(HostInfoRequest) returns (Unit);
   rpc SendData(DataRequest) returns (DataResponse);
   rpc GetTask(GetTaskReq) returns (GetTaskResp);
   rpc TaskDone(TaskDoneReq) returns (Unit);
@@ -30,11 +30,7 @@ message Ipv6Addr {
 }
 
 message HostInfoRequest {
-  // This field should be empty if it is the first time the instance connected
-  // to the server, and the server will returns an `instance_id` in response.
-  // If this field contains a value, the server will use this to identify the
-  // machine instance.
-  optional string instance_id = 1;
+  string instance_id = 1;
 
   // The following field can be empty if this request is used for heartbeat.
   // If any of them contains a value, the instance info on the server side will
@@ -45,24 +41,6 @@ message HostInfoRequest {
   optional string kernel_version = 5;
   optional fixed32 local_ipv4_addr = 6;  // big-endian
   optional Ipv6Addr local_ipv6_addr = 7; // big-endian
-
-  // True if ready to receive and execute WASM component
-  bool idle = 8;
-  // Contains finished task id
-  optional string task_id = 9;
-}
-
-message HostInfoResponse {
-  // Empty if no error
-  optional int64 errno = 1;
-
-  // Not empty if and only if the request has no `instance_id`.
-  optional string instance_id = 2;
-
-  optional string message = 3;
-
-  // If request `idle` is true, the remote server will send the task if needed.
-  optional Task task = 4;
 }
 
 message Task {

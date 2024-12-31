@@ -8,12 +8,14 @@ service PshService {
   rpc SendData(DataRequest) returns (DataResponse);
   rpc GetTask(GetTaskReq) returns (GetTaskResp);
   rpc TaskDone(TaskDoneReq) returns (Unit);
+  rpc NewInstanceId(Unit) returns (NewInstanceIdResp);
 }
 
 message Unit {}
 message GetTaskReq { string instance_id = 1; }
 message GetTaskResp { optional Task task = 1; }
 message TaskDoneReq { string task_id = 1; }
+message NewInstanceIdResp { string instance_id = 1; }
 
 message InstanceState {
   string instance_id = 1;

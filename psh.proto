@@ -5,7 +5,7 @@ package psh.proto.instance;
 service PshService {
   rpc Heartbeat(InstanceState) returns (Unit);
   rpc SendHostInfo(HostInfoRequest) returns (Unit);
-  rpc SendData(DataRequest) returns (DataResponse);
+  rpc SendData(DataRequest) returns (Unit);
   rpc GetTask(GetTaskReq) returns (GetTaskResp);
   rpc TaskDone(TaskDoneReq) returns (Unit);
   rpc NewInstanceId(Unit) returns (NewInstanceIdResp);
@@ -69,9 +69,4 @@ message Metadata {
 message MetricMeta {
   uint64 start_time = 1;
   uint64 end_time = 2;
-}
-
-message DataResponse {
-  // Empty if no error
-  optional int64 errno = 1;
 }

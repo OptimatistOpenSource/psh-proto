@@ -3,9 +3,9 @@ syntax = "proto3";
 package psh.proto.instance;
 
 service PshService {
-  rpc Heartbeat(InstanceState) returns (Unit);
-  rpc SendHostInfo(HostInfoRequest) returns (Unit);
-  rpc SendData(DataRequest) returns (Unit);
+  rpc Heartbeat(HeartbeatReq) returns (Unit);
+  rpc SendHostInfo(SendHostInfoReq) returns (Unit);
+  rpc ExportData(ExportDataReq) returns (Unit);
   rpc GetTask(GetTaskReq) returns (GetTaskResp);
   rpc TaskDone(TaskDoneReq) returns (Unit);
   rpc NewInstanceId(Unit) returns (NewInstanceIdResp);
@@ -17,7 +17,7 @@ message GetTaskResp { optional Task task = 1; }
 message TaskDoneReq { string task_id = 1; }
 message NewInstanceIdResp { string instance_id = 1; }
 
-message InstanceState {
+message HeartbeatReq {
   string instance_id = 1;
   bool idle = 2;
 }
@@ -29,7 +29,7 @@ message Ipv6Addr {
   fixed64 lo_64_bits = 2;
 }
 
-message HostInfoRequest {
+message SendHostInfoReq {
   string instance_id = 1;
 
   // The following field can be empty if this request is used for heartbeat.
@@ -51,7 +51,7 @@ message Task {
   uint64 end_time = 4;
 }
 
-message DataRequest {
+message ExportDataReq {
   string task_id = 1;
   Metadata metadata = 2;
   bytes payload = 3;

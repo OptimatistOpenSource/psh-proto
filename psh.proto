@@ -53,20 +53,11 @@ message Task {
 
 message ExportDataReq {
   string task_id = 1;
-  Metadata metadata = 2;
+  DataType ty = 2;
   bytes payload = 3;
 }
 
-message Metadata {
-  // Data type
-  string type = 1;
-  // Data size of bytes
-  uint64 size = 2;
-  // Metric metadata
-  optional MetricMeta metric_meta = 3;
-}
-
-message MetricMeta {
-  uint64 start_time = 1;
-  uint64 end_time = 2;
+enum DataType {
+  FILE = 0;
+  LINE_PROTOCOL = 1;
 }

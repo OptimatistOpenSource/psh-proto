@@ -53,8 +53,12 @@ message Task {
 
 message ExportDataReq {
   string task_id = 1;
-  DataType ty = 2;
-  bytes payload = 3;
+  repeated Data data = 2;
+}
+
+message Data {
+  DataType ty = 1;
+  bytes bytes = 2;
 }
 
 enum DataType {

@@ -1,10 +1,10 @@
-PSH Protobuf Project
-=========================
+# PSH Protobuf Project
 
 This project is shared between different projects that need to communicate with each others via gRPC.
 
-How To Use it?
-==============
+# How To Use it?
+
+## Manual
 
 - Add this project as a submodule in project that you're working on.
 
@@ -13,28 +13,17 @@ How To Use it?
 ```
 
 - Initialize and Update Submodule:
+
 ```
     git submodule update --init --recursive
 ```
 
-- Reference the protobuf files within it directly from your project. Import the protobuf definitions in your projects as you normally would. 
+- Reference the protobuf files within it directly from your project. Import the protobuf definitions in your projects as you normally would.
 
-Rust
-====
+## Rust
 
-To automatically use the latest proto files while you're running `cargo build`, add this code snippet in your `build.rs`. For example:
+Add this code snippet in your `Cargo.toml`
 
-```rust
-use std::process::Command;
-
-fn main() {
-    // Update the psh-proto submodule
-    let _ = Command::new("git")
-        .args(&["submodule", "update", "--remote", "--merge"])
-        .status();
-
-    // Additional build steps if needed
-
-    // Cargo will continue with its default build process after this script exits
-}
+```toml
+psh-proto = { git = "ssh://git@github.com/OptimatistOpenSource/psh-proto.git", rev = "..." }
 ```

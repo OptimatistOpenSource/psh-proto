@@ -1,12 +1,12 @@
 [workspace.package]
-edition = "2021"
+edition = "2024"
 
 [workspace]
 members = ["./rust"]
-resolver = "2"
+resolver = "3"
 exclude = [".github"]
 
 [workspace.dependencies]
-tonic = "0.12"
+tonic = "0.13"
 prost = "0.13"
-tonic-build = "0.12"
+tonic-build = "0.13"

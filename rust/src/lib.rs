@@ -12,6 +12,13 @@ impl From<std::net::Ipv6Addr> for Ipv6Addr {
     }
 }
 
+impl From<Ipv6Addr> for std::net::Ipv6Addr {
+    fn from(val: Ipv6Addr) -> Self {
+        let ip = ((val.hi_64_bits as u128) << 64) | (val.lo_64_bits as u128);
+        std::net::Ipv6Addr::from_bits(u128::from_be(ip))
+    }
+}
+
 #[test]
 fn test_ipv6_into_pb_repr() {
     use std::net::Ipv6Addr as StdIpv6Addr;
@@ -22,9 +29,7 @@ fn test_ipv6_into_pb_repr() {
 
     let pb_repr: Ipv6Addr = raw.into();
 
-    let hi = (pb_repr.hi_64_bits as u128) << 64;
-    let lo = pb_repr.lo_64_bits as u128;
-    let ip = StdIpv6Addr::from_bits(u128::from_be(hi | lo));
+    let ip: StdIpv6Addr = pb_repr.into();
 
     assert_eq!(ip, StdIpv6Addr::from_bits(1));
 }

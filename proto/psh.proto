@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package psh.proto.instance;
 
+import "perf/perf_data.proto";
+
 service PshService {
   rpc Heartbeat(HeartbeatReq) returns (Unit);
   rpc SendHostInfo(SendHostInfoReq) returns (Unit);
@@ -9,6 +11,7 @@ service PshService {
   rpc GetTask(GetTaskReq) returns (GetTaskResp);
   rpc TaskDone(TaskDoneReq) returns (Unit);
   rpc NewInstanceId(Unit) returns (NewInstanceIdResp);
+  rpc ExportPerfData(PerfDataProto) returns (Unit);
 }
 
 message Unit {}

@@ -35,7 +35,7 @@ jobs:
       - name: Build
         run: |
           if [ ! -d target ]; then mkdir target; fi
-          protoc --rust_opt='experimental-codegen=enabled,kernel=cpp' --rust_out=./target psh.proto
+          protoc --rust_opt='experimental-codegen=enabled,kernel=cpp' --rust_out=./target psh.proto -I proto
 
       - name: Test
         run: |

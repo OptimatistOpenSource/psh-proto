@@ -10,3 +10,4 @@ exclude = [".github"]
 tonic = "0.13"
 prost = "0.13"
 tonic-build = "0.13"
+perf-event-rs = { git = "https://github.com/saying121/perf-event-rs.git", rev = "d6881f34b8a9cde1d70dab5fb1415271e6b0bb25" }

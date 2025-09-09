@@ -230,10 +230,6 @@ message PerfDataProto {
     // Comm string's md5 prefix.
     optional uint64 comm_md5_prefix = 4;
 
-    // Time the sample was taken.
-    // Deprecated, use |sample_info| instead.
-    optional uint64 sample_time = 5 [deprecated = true];
-
     // Info about the perf sample containing this event.
     optional SampleInfo sample_info = 6;
   }
@@ -831,6 +827,22 @@ message PerfDataProto {
     optional bool cap_user_time_short = 7;
   }
 
+  message BpfEvent {
+    uint32 type = 1;
+    uint32 flags = 2;
+    uint32 id = 3;
+    bytes tag = 4;
+    SampleInfo sample_info = 6;
+  }
+
+  message TextPokeEvent {
+    uint64 addr = 1;
+    uint32 old_len = 2;
+    uint32 new_len = 3;
+    bytes bytes = 4;
+    SampleInfo sample_info = 6;
+  }
+
   // Next tag: 4
   message EventHeader {
     // Type of event.
@@ -872,6 +884,8 @@ message PerfDataProto {
       StatRoundEvent stat_round_event = 23;
       CgroupEvent cgroup_event = 24;
       KsymbolEvent ksymbol_event = 25;
+      BpfEvent bpf_event = 27;
+      TextPokeEvent text_poke_event = 28;
     }
     // Time after boot in nanoseconds corresponding to the event.
     optional uint64 timestamp = 10;

@@ -11,7 +11,6 @@ service PshService {
   rpc GetTask(GetTaskReq) returns (GetTaskResp);
   rpc TaskDone(TaskDoneReq) returns (Unit);
   rpc NewInstanceId(Unit) returns (NewInstanceIdResp);
-  rpc ExportPerfData(PerfDataProto) returns (Unit);
 }
 
 message Unit {}
@@ -56,15 +55,22 @@ message Task {
 
 message ExportDataReq {
   string task_id = 1;
+
+  message Data {
+    oneof data_type {
+      FileData file = 1;
+      LineProtocolData line_protocol = 2;
+      PerfDataProto perf_data = 3;
+    }
+  }
+
   repeated Data data = 2;
 }
 
-message Data {
-  DataType ty = 1;
+message FileData {
   bytes bytes = 2;
 }
 
-enum DataType {
-  FILE = 0;
-  LINE_PROTOCOL = 1;
+message LineProtocolData {
+  bytes bytes = 2;
 }

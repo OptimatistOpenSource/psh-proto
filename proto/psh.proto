@@ -68,9 +68,9 @@ message ExportDataReq {
 }
 
 message FileData {
-  bytes bytes = 2;
+  bytes bytes = 1;
 }
 
 message LineProtocolData {
-  bytes bytes = 2;
+  bytes bytes = 1;
 }

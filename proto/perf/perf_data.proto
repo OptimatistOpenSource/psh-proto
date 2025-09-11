@@ -1,3 +1,9 @@
+// This code is adapted from: perf_data_converter - https://github.com/google/perf_data_converter/blob/master/src/quipper/perf_data.proto
+// Copyright: Google LLC
+// License: BSD-style
+//
+// Modifications include: Add more fields
+
 syntax = "proto3";
 
 package psh.proto.instance;

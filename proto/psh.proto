@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package psh.proto.instance;
 
+import "perf/perf_data.proto";
+
 service PshService {
   rpc Heartbeat(HeartbeatReq) returns (Unit);
   rpc SendHostInfo(SendHostInfoReq) returns (Unit);
@@ -53,15 +55,22 @@ message Task {
 
 message ExportDataReq {
   string task_id = 1;
+
+  message Data {
+    oneof data_type {
+      FileData file = 1;
+      LineProtocolData line_protocol = 2;
+      PerfDataProto perf_data = 3;
+    }
+  }
+
   repeated Data data = 2;
 }
 
-message Data {
-  DataType ty = 1;
-  bytes bytes = 2;
+message FileData {
+  bytes bytes = 1;
 }
 
-enum DataType {
-  FILE = 0;
-  LINE_PROTOCOL = 1;
+message LineProtocolData {
+  bytes bytes = 1;
 }

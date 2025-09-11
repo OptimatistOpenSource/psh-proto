@@ -30,12 +30,7 @@ jobs:
       - name: Install Protoc
         uses: arduino/setup-protoc@v3
         with:
-          version: "28.x"
-
-      - name: Build
-        run: |
-          if [ ! -d target ]; then mkdir target; fi
-          protoc --rust_opt='experimental-codegen=enabled,kernel=cpp' --rust_out=./target psh.proto
+          version: "32.x"
 
       - name: Test
         run: |

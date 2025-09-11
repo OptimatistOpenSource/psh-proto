@@ -4,8 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-tonic.workspace = true
+perf-event-rs.workspace = true
 prost.workspace = true
+serde = { workspace = true, features = ["derive"] }
+tonic.workspace = true
 
 [build-dependencies]
 tonic-build.workspace = true

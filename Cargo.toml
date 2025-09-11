@@ -1,12 +1,14 @@
+[workspace]
+resolver = "3"
+members = ["./rust"]
+exclude = [".github"]
+
 [workspace.package]
 edition = "2024"
 
-[workspace]
-members = ["./rust"]
-resolver = "3"
-exclude = [".github"]
-
 [workspace.dependencies]
-tonic = "0.13"
+perf-event-rs = { git = "https://github.com/saying121/perf-event-rs.git", rev = "d6881f34b8a9cde1d70dab5fb1415271e6b0bb25" }
 prost = "0.13"
+serde = "1"
+tonic = "0.13"
 tonic-build = "0.13"

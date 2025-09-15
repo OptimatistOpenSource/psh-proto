@@ -61,6 +61,7 @@ message ExportDataReq {
       FileData file = 1;
       LineProtocolData line_protocol = 2;
       PerfDataProto perf_data = 3;
+      ElfSymbol symbol = 4;
     }
   }
 
@@ -73,4 +74,16 @@ message FileData {
 
 message LineProtocolData {
   bytes bytes = 1;
+}
+
+message ElfSymbol {
+  string filename = 1;
+  repeated Symbol symbols = 2;
+}
+
+message Symbol {
+  uint64 index = 1;
+  string name = 2;
+  uint64 address = 3;
+  uint64 size = 4;
 }

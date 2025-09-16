@@ -47,10 +47,33 @@ message SendHostInfoReq {
 
 message Task {
   string id = 1;
-  bytes wasm = 2;
-  repeated string wasm_args = 3;
   // Number of non-leap-milliseconds since Jan 1, 1970 UTC.
-  uint64 end_time = 4;
+  uint64 end_time = 2;
+
+  oneof task_type {
+    WasmTask wasm = 3;
+    ProfilingTask profiling = 4;
+  }
+
+  message WasmTask {
+    bytes wasm = 1;
+    repeated string wasm_args = 2;
+  }
+
+  message ProfilingTask {
+    oneof process {
+      Unit any = 1;
+      Unit current = 2;
+      uint32 pid = 3;
+    }
+
+    uint64 mmap_pages = 4;
+    optional uint32 stack_depth = 5;
+    oneof overflow_by {
+      uint64 period = 6;
+      uint64 freq = 7;
+    }
+  }
 }
 
 message ExportDataReq {
@@ -77,13 +100,13 @@ message LineProtocolData {
 }
 
 message ElfSymbol {
-  string filename = 1;
+  string file_path = 1;
   repeated Symbol symbols = 2;
 }
 
 message Symbol {
   uint64 index = 1;
-  string name = 2;
+  optional string name = 2;
   uint64 address = 3;
   uint64 size = 4;
 }

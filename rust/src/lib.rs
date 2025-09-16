@@ -9,6 +9,25 @@ use self::perf_data_proto::{
 
 tonic::include_proto!("psh.proto.instance");
 
+impl From<crate::task::profiling_task::Process> for perf_event_rs::config::Process {
+    fn from(value: crate::task::profiling_task::Process) -> Self {
+        match value {
+            task::profiling_task::Process::Any(_) => Self::Any,
+            task::profiling_task::Process::Current(_) => Self::Current,
+            task::profiling_task::Process::Pid(pid) => Self::Pid(pid),
+        }
+    }
+}
+
+impl From<crate::task::profiling_task::OverflowBy> for perf_event_rs::sampling::OverflowBy {
+    fn from(value: crate::task::profiling_task::OverflowBy) -> Self {
+        match value {
+            task::profiling_task::OverflowBy::Period(p) => Self::Period(p),
+            task::profiling_task::OverflowBy::Freq(f) => Self::Freq(f),
+        }
+    }
+}
+
 impl From<std::net::Ipv6Addr> for Ipv6Addr {
     fn from(value: std::net::Ipv6Addr) -> Self {
         let ip = value.to_bits().to_be();

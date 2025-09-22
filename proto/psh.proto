@@ -53,11 +53,6 @@ message Task {
   oneof task_type {
     WasmTask wasm = 3;
     ProfilingTask profiling = 4;
-    DisasmTask disasm = 5;
-  }
-
-  message DisasmTask {
-    Symbol sym = 1;
   }
 
   message WasmTask {
@@ -89,8 +84,7 @@ message ExportDataReq {
       FileData file = 1;
       LineProtocolData line_protocol = 2;
       PerfDataProto perf_data = 3;
-      ElfSymbol symbol = 4;
-      Insns insns = 5;
+      ElfFile elf_file = 4;
     }
   }
 
@@ -105,24 +99,9 @@ message LineProtocolData {
   bytes bytes = 1;
 }
 
-message ElfSymbol {
-  string file_path = 1;
-  repeated Symbol symbols = 2;
-}
-
-message Symbol {
-  uint64 index = 1;
-  optional string name = 2;
-  uint64 address = 3;
-  uint64 size = 4;
-}
-
-message Insns {
-  repeated Instruction insns = 1;
-
-  message Instruction {
-    uint64 addr = 1;
-    optional string mnemonic = 2;
-    optional string op = 3;
-  }
+message ElfFile {
+  string filename = 1;
+  bytes build_id = 2;
+  string arch = 3; // use for disasm
+  bytes bytes = 4;
 }

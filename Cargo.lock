@@ -615,7 +615,7 @@ checksum = "e3148f5046208a5d56bcfc03053e3ca6334e51da8dfb19b6cdc8b306fae3283e"
 [[package]]
 name = "perf-event-rs"
 version = "0.0.0"
-source = "git+https://github.com/saying121/perf-event-rs.git?rev=d6881f34b8a9cde1d70dab5fb1415271e6b0bb25#d6881f34b8a9cde1d70dab5fb1415271e6b0bb25"
+source = "git+https://github.com/OptimatistOpenSource/perf-event-rs.git?rev=f6be76525e5540dbc8d8a34f755da919102572ec#f6be76525e5540dbc8d8a34f755da919102572ec"
 dependencies = [
  "bindgen",
  "libc",

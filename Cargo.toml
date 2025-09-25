@@ -7,7 +7,7 @@ exclude = [".github"]
 edition = "2024"
 
 [workspace.dependencies]
-perf-event-rs = { git = "https://github.com/saying121/perf-event-rs.git", rev = "d6881f34b8a9cde1d70dab5fb1415271e6b0bb25" }
+perf-event-rs = { git = "https://github.com/OptimatistOpenSource/perf-event-rs.git", rev = "d6881f34b8a9cde1d70dab5fb1415271e6b0bb25" }
 prost = "0.13"
 serde = "1"
 tonic = "0.13"

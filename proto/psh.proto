@@ -101,7 +101,7 @@ message LineProtocolData {
 
 message ElfFile {
   string filename = 1;
-  bytes build_id = 2;
+  optional string build_id = 2;
   string arch = 3; // use for disasm
   bytes bytes = 4;
 }

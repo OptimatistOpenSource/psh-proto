@@ -84,6 +84,16 @@ impl From<perf_event_rs::sampling::record::mmap::Body> for MMapEvent {
     }
 }
 
+pub fn build_id_to_str(build_id: [u8; 20]) -> String {
+    use std::fmt::Write;
+
+    let mut string = String::with_capacity(40);
+    for ele in build_id {
+        write!(string, "{ele:02x}").unwrap();
+    }
+    string
+}
+
 impl From<perf_event_rs::sampling::record::mmap2::Body> for MMapEvent {
     fn from(body: perf_event_rs::sampling::record::mmap2::Body) -> Self {
         let (maj, min, ino, ino_generation, build_id) = match body.anon_enum {
@@ -94,8 +104,12 @@ impl From<perf_event_rs::sampling::record::mmap2::Body> for MMapEvent {
                 ino_generation,
             } => (Some(maj), Some(min), Some(ino), Some(ino_generation), None),
             perf_event_rs::sampling::record::mmap2::AnonEnum::BuildId(items) => {
-                let build_id = String::from_utf8(items).ok();
-                (None, None, None, None, build_id)
+                let mut bid = [0; 20];
+                for (i, &ele) in items.iter().enumerate() {
+                    bid[i] = ele;
+                }
+                let build_id: String = build_id_to_str(bid);
+                (None, None, None, None, build_id.into())
             }
         };
         MMapEvent {
